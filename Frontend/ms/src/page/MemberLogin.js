@@ -15,15 +15,16 @@ const MemberLogin = () => {
     // if verified in backend, loginState will change in redux store
     const handelMemberLogin = async (e) => {
         e.preventDefault();
-        const isVerifed = await fetch(`/api/member/login/${username}/${password}`)
+        const isVerifed = await fetch(`http://localhost:8000/api/member/login/${username}/${password}`)
         const response = await isVerifed.json();
+        console.log('response : ',response);
         if(response === 'verified' ){
             dispatch(setLoginState());
             dispatch(setMembername(username));
         } else {
             alert('Wrong Credientials or Server error')
         }
-    }
+    };
 
 
     return (

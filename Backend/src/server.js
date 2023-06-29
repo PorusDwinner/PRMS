@@ -1,21 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const { MongoClient } = require('mongodb');
 const app = express();
 const port = 8000;
-require('dotenv').config()
 
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
 
 //----------Connecting to Database Asynchronously--------------------------------------------\\
+
 const withDB = async (operations , res) => {
     try{
-        const client = await MongoClient.connect(
-            `{process.env.URI}`,
+        const client = await MongoClient.connect( 'mongodb+srv://Kaafiro_Phobia:kDb2ijYjMGWolPi0@clusterfake.tisia34.mongodb.net/',
             { useNewUrlParser : true , useUnifiedTopology : true }
         )
     
-        const db = client.db('prm');
+        const db = client.db('PRMS');
         await operations(db);
         client.close();
     } catch(error) {
@@ -28,12 +30,10 @@ const withDB = async (operations , res) => {
 app.get('/api/member/login/:inputUsername/:inputPassword' , (req , res) => {
     const inputUsername = req.params.inputUsername;
     const inputPassword = req.params.inputPassword;
+    console.log('API Triggered');
     
     withDB( async(db) => {
-        const membersDataFromDB = await db.collection('member').find().toArray()
-        .then(() => console.log('DB connected'))
-        .catch((err) => console.log('failed',err));
-
+        const membersDataFromDB = await db.collection('member').find().toArray();
         const filterMemeber = membersDataFromDB.filter((ele) => ele.username === inputUsername);
         if(filterMemeber[0].password === inputPassword){
             res.json('verified');
