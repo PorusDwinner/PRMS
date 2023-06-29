@@ -17,12 +17,11 @@ const MemberLogin = () => {
         e.preventDefault();
         const isVerifed = await fetch(`/api/member/login/${username}/${password}`)
         const response = await isVerifed.json();
-        console.log(response);
         if(response === 'verified' ){
             dispatch(setLoginState());
             dispatch(setMembername(username));
         } else {
-            alert('Wrong Credientials')
+            alert('Wrong Credientials or Server error')
         }
     }
 

@@ -30,7 +30,10 @@ app.get('/api/member/login/:inputUsername/:inputPassword' , (req , res) => {
     const inputPassword = req.params.inputPassword;
     
     withDB( async(db) => {
-        const membersDataFromDB = await db.collection('member').find().toArray();
+        const membersDataFromDB = await db.collection('member').find().toArray()
+        .then(() => console.log('DB connected'))
+        .catch((err) => console.log('failed',err));
+
         const filterMemeber = membersDataFromDB.filter((ele) => ele.username === inputUsername);
         if(filterMemeber[0].password === inputPassword){
             res.json('verified');
