@@ -15,7 +15,7 @@ const MemberLogin = () => {
     // if verified in backend, loginState will change in redux store
     const handelMemberLogin = async (e) => {
         e.preventDefault();
-        const isVerifed = await fetch(`http://localhost:8000/api/member/login/${username}/${password}`)
+        const isVerifed = await fetch(`https://prms-backend.onrender.com//api/member/login/${username}/${password}`)
         const response = await isVerifed.json();
         console.log('response : ',response);
         if(response === 'verified' ){
@@ -25,7 +25,7 @@ const MemberLogin = () => {
             alert('Wrong Credientials or Server error')
         }
     };
-
+    
 
     return (
         <div className='w-[40%] display-block m-auto bg-slate-100 mt-4 p-10'>
