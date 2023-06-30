@@ -36,7 +36,7 @@ const Home = () => {
   // fetch function to fetch patient details by aadhaar
   const searchByAadhaar = async () => {
     if (searchAdhaar.length === 16) {
-      const result = await fetch(`http://localhost:8000/api/get/patient/${searchAdhaar}`)
+      const result = await fetch(`https://prms-backend.onrender.com/api/get/patient/${searchAdhaar}`)
       const data = await result.json();
       setPatientAadhaar(data);
     } else {
@@ -47,7 +47,7 @@ const Home = () => {
   // fetch function to fetch patient details by phone no.  
   const searchByPhone = async () => {
     if (searchPhone.length === 10) {
-      const result = await fetch(`http://localhost:8000/api/get/patient/phone/${searchPhone}`)
+      const result = await fetch(`https://prms-backend.onrender.com/api/get/patient/phone/${searchPhone}`)
       const data = await result.json();
       setSearchPatientPhone(data);
     } else {
@@ -61,7 +61,7 @@ const Home = () => {
       if (searchDate.includes('-')) {
         alert('Insert Date in Correct Format')
       } else {
-        const result = await fetch(`http://localhost:8000/api/get/patient/${searchDate}`)
+        const result = await fetch(`https://prms-backend.onrender.com/api/get/patient/${searchDate}`)
         const data = await result.json();
         setPatientDate(data);
       }
@@ -72,7 +72,7 @@ const Home = () => {
 
   const handelPatientData = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8000/api/post/new-patient', {
+    fetch('https://prms-backend.onrender.com/api/post/new-patient', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
