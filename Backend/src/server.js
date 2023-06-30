@@ -30,7 +30,7 @@ const withDB = async (operations , res) => {
 app.get('/api/member/login/:inputUsername/:inputPassword' , (req , res) => {
     const inputUsername = req.params.inputUsername;
     const inputPassword = req.params.inputPassword;
-    console.log('API Triggered');
+    // console.log('API Triggered');
     
     withDB( async(db) => {
         const membersDataFromDB = await db.collection('member').find().toArray();
