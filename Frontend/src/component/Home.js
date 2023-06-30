@@ -89,7 +89,9 @@ const Home = () => {
         address: patientAddress,
         complains: complains,
       })
-    })
+    });
+    setPatientName('') , setPatientAdhaar('') , setPatientAge('') , setPatientPhone('') , setPatientDepartment('');
+    setDoctorName('') , setRoomNo('') , setDate('') , setPatientAddress('') , setComplains('');
   };
 
   return (
